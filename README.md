@@ -95,7 +95,11 @@ This platform allows users to:
 
 ## 📸 Screenshots
 
-(Add screenshots here)
+<img width="1920" height="1017" alt="photo1" src="https://github.com/user-attachments/assets/799f2f82-8238-4977-97b8-0b9d3ac9c4b1" />
+<img width="1920" height="1017" alt="photo2" src="https://github.com/user-attachments/assets/59144fa3-f122-4030-941c-1a365c57a456" />
+<img width="1920" height="1015" alt="photo3" src="https://github.com/user-attachments/assets/6a3973d8-9867-4184-adc5-c5edcf9a01b7" />
+<img width="1920" height="1015" alt="photo4" src="https://github.com/user-attachments/assets/917a4cdd-12c9-403b-8d73-c0f0738ac08e" />
+
 
 ---
 

@@ -1,5 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Disaster Dashboard</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: #ffffff;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar a {
+            color: #ffffff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        /* GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* 🔥 FIXED CARD */
+        .card {
+            background: rgba(0, 0, 0, 0.5);   /* DARKER */
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        h2, h3 {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        .high { color: #ff4d4d; }
+        .medium { color: #ffa500; }
+        .low { color: #4caf50; }
+
+        /* ALERT */
+        .alert {
+            background: rgba(255, 0, 0, 0.25);
+            border-left: 5px solid red;
+            padding: 10px;
+            margin-bottom: 20px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.5; }
+        }
+
+        #map {
+            height: 300px;
+            border-radius: 10px;
+        }
+
+        canvas {
+            max-height: 250px;
+        }
+    </style>
+</head>
+
+<body>
+
 <div class="navbar">
-    <h2>📊 Dashboard</h2>
+    <h2>🚨 AI Disaster Dashboard</h2>
     <div>
         <a href="/">Home</a>
         <a href="/history/">History</a>
@@ -8,26 +113,133 @@
 
 <div class="container">
 
-<div class="card">
-    <h3>Total Reports: {{ total }}</h3>
-</div>
+    {% if high > 0 %}
+    <div class="alert">
+        🚨 High Severity Cases Detected: {{ high }}
+    </div>
+    {% endif %}
 
-<div class="card">
-    <canvas id="severityChart"></canvas>
-</div>
+    <!-- STATS -->
+    <div class="grid">
+        <div class="card">
+            <div>Total Reports</div>
+            <div class="stat">{{ total }}</div>
+        </div>
+
+        <div class="card">
+            <div>High</div>
+            <div class="stat high">{{ high }}</div>
+        </div>
+
+        <div class="card">
+            <div>Medium</div>
+            <div class="stat medium">{{ medium }}</div>
+        </div>
+
+        <div class="card">
+            <div>Low</div>
+            <div class="stat low">{{ low }}</div>
+        </div>
+    </div>
+
+    <!-- 📊 CHART -->
+    <div class="card" style="margin-top:20px;">
+        <h3>📊 Severity Distribution</h3>
+        <canvas id="severityChart"></canvas>
+    </div>
+
+    <!-- 📈 TREND -->
+    <div class="card" style="margin-top:20px;">
+        <h3>📈 Reports Trend</h3>
+        <canvas id="trendChart"></canvas>
+    </div>
+
+    <!-- 🌍 MAP -->
+    <div class="card" style="margin-top:20px;">
+        <h3>🌍 Disaster Locations</h3>
+        <div id="map"></div>
+    </div>
 
 </div>
 
 <script>
-const ctx = document.getElementById('severityChart');
-
-new Chart(ctx, {
+// =====================
+// 📊 Doughnut Chart
+// =====================
+new Chart(document.getElementById('severityChart'), {
     type: 'doughnut',
     data: {
         labels: ['High', 'Medium', 'Low'],
         datasets: [{
             data: [{{ high }}, {{ medium }}, {{ low }}],
+            backgroundColor: ['#ff4d4d','#ffa500','#4caf50']
         }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'   // 🔥 FIX
+                }
+            }
+        }
     }
 });
+
+// =====================
+// 📈 Trend Chart
+// =====================
+new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        datasets: [{
+            label: 'Reports',
+            data: [3,5,2,8,6,9,4],
+            borderColor: '#00eaff',
+            tension: 0.4
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: 'white'
+                }
+            }
+        },
+        scales: {
+            x: {
+                ticks: { color: 'white' }
+            },
+            y: {
+                ticks: { color: 'white' }
+            }
+        }
+    }
+});
+
+// =====================
+// 🌍 MAP
+// =====================
+var map = L.map('map').setView([20, 78], 4);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+.addTo(map);
+
+var locations = {{ locations|safe }};
+
+locations.forEach(loc => {
+    let color = loc.severity === "High" ? "red" :
+                loc.severity === "Medium" ? "orange" : "green";
+
+    L.circleMarker([loc.lat, loc.lon], {
+        color: color,
+        radius: 8
+    }).addTo(map)
+    .bindPopup(`<b>${loc.type}</b><br>${loc.severity}`);
+});
 </script>
+
+</body>
+</html>

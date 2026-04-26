@@ -1,0 +1,33 @@
+<div class="navbar">
+    <h2>📊 Dashboard</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/history/">History</a>
+    </div>
+</div>
+
+<div class="container">
+
+<div class="card">
+    <h3>Total Reports: {{ total }}</h3>
+</div>
+
+<div class="card">
+    <canvas id="severityChart"></canvas>
+</div>
+
+</div>
+
+<script>
+const ctx = document.getElementById('severityChart');
+
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['High', 'Medium', 'Low'],
+        datasets: [{
+            data: [{{ high }}, {{ medium }}, {{ low }}],
+        }]
+    }
+});
+</script>

@@ -95,10 +95,19 @@ This platform allows users to:
 
 ## 📸 Screenshots
 
-<img width="1920" height="1017" alt="photo1" src="https://github.com/user-attachments/assets/799f2f82-8238-4977-97b8-0b9d3ac9c4b1" />
-<img width="1920" height="1017" alt="photo2" src="https://github.com/user-attachments/assets/59144fa3-f122-4030-941c-1a365c57a456" />
-<img width="1920" height="1015" alt="photo3" src="https://github.com/user-attachments/assets/6a3973d8-9867-4184-adc5-c5edcf9a01b7" />
-<img width="1920" height="1015" alt="photo4" src="https://github.com/user-attachments/assets/917a4cdd-12c9-403b-8d73-c0f0738ac08e" />
+<img width="1920" height="1017" alt="photo1" src="https://github.com/user-attachments/assets/fd0f6630-b6ea-402e-a6bc-391e8a13775a" />
+
+<img width="1920" height="1015" alt="photo2" src="https://github.com/user-attachments/assets/01fa6ce6-fed2-431c-aedc-0730239fca6c" />
+
+<img width="1920" height="1021" alt="photo3" src="https://github.com/user-attachments/assets/06797191-b884-468f-b589-03cfdd972cc8" />
+
+<img width="1920" height="1024" alt="photo4" src="https://github.com/user-attachments/assets/faa732e3-75f5-409d-b54d-58b9895de802" />
+
+<img width="1920" height="1020" alt="photo5" src="https://github.com/user-attachments/assets/93ecb40e-c8b3-413f-b011-bc3bd8b48566" />
+
+<img width="1920" height="1011" alt="photo6" src="https://github.com/user-attachments/assets/568c509a-d078-465f-aa00-984785cc5011" />
+
+<img width="1920" height="1021" alt="photo7" src="https://github.com/user-attachments/assets/4d316ff4-eb1e-4624-84be-e4a3e8b7bcf7" />
 
 
 ---

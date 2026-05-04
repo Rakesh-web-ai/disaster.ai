@@ -87,9 +87,9 @@ This platform allows users to:
 
 ## 🔗 Links
 
-- GitHub Repo: (add your repo link)
-- Demo Video: (add your video link)
-- Live Demo: (if deployed)
+- GitHub Repo: https://github.com/Rakesh-web-ai/disaster.ai
+- Demo Video:  currently working on it!
+- Live Demo:   currently working on it!
 
 ---
 
